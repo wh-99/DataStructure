@@ -175,7 +175,7 @@ template <typename T> List<T>& List<T>::operator+=(const List<T>& _other) {
 
 template <typename T> T& List<T>::operator[](const unsigned int& _idx) const { return findIdx(_idx)->data; }
 
-template <typename T> List<T>::operator bool() const noexcept { return mSize; }
+template <typename T> List<T>::operator bool() const noexcept { return mSize > 0; }
 
 template<typename T> void List<T>::push_front(const T& _data) {
     typename List<T>::Node* newNode = makeNewNode(_data, { }, mHead);
