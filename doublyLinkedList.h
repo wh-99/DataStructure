@@ -37,6 +37,11 @@ class List {
         List<T>& operator=(const List<T>& _other);
         List<T>& operator=(List<T>&& _other) noexcept;
 
+        bool operator==(const List<T>& _other) const noexcept;
+        bool operator!=(const List<T>& _other) const noexcept;
+
+        List<T>& operator+=(const List<T>& _other);
+
         T& operator[](const unsigned int& _idx) const;      // not safe
 
         operator bool() const noexcept;
@@ -146,6 +151,23 @@ template <typename T> List<T>& List<T>::operator=(List<T>&& _other) noexcept {
         _other.mSize = { };
         _other.mHead = { };
         _other.mTail = { };
+    }
+
+    return *this;
+}
+
+template <typename T> bool List<T>::operator==(const List<T>& _other) const noexcept { return this == &_other; }
+template <typename T> bool List<T>::operator!=(const List<T>& _other) const noexcept { return this != &_other; }
+
+template <typename T> List<T>& List<T>::operator+=(const List<T>& _other) {
+    if (this != &_other) {
+        auto it = _other.begin();
+
+        while (it) {
+            push_back(*it);
+
+            ++it;
+        }
     }
 
     return *this;
@@ -274,10 +296,8 @@ template<typename T> void List<T>::remove_data(const T& _data) {
             typename List<T>::Node* targetPrev = target->prev;
             typename List<T>::Node* targetNext = target->next;
 
-            if (targetPrev)
-                targetPrev->next = targetNext;
-            if (targetNext)
-                targetNext->prev = targetPrev;
+            targetPrev->next = targetNext;
+            targetNext->prev = targetPrev;
 
             delete target;
             --mSize;
