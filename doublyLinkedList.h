@@ -56,14 +56,14 @@ class List {
         void remove_data(const T& _data);
         void clear();
 
-        unsigned int size() const noexcept;
-        bool isEmpty() const noexcept;
-
         T& front() const;           // not safe
         T& back() const;            // not safe
 
         Iterator begin() const;     // not safe
         Iterator end() const;       // not safe
+
+        unsigned int size() const noexcept;
+        bool isEmpty() const noexcept;
 
     private:
         Node* makeNewNode(const T& _data, Node* _prev = { }, Node* _next = { }) const;
