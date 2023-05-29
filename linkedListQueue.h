@@ -43,7 +43,7 @@ class Queue {
         unsigned int mSize = { };
 };
 
-template<typename T> typename Queue<T>::Node* Queue<T>::makeNewNode(const T& _data, typename Queue<T>::Node* _next) const {
+template <typename T> typename Queue<T>::Node* Queue<T>::makeNewNode(const T& _data, typename Queue<T>::Node* _next) const {
     typename Queue<T>::Node* newNode = new Node;
     newNode->data = _data;
     newNode->next = _next;
@@ -51,15 +51,15 @@ template<typename T> typename Queue<T>::Node* Queue<T>::makeNewNode(const T& _da
     return newNode;
 }
 
-template<typename T> Queue<T>::Queue() { }
-template<typename T> Queue<T>::~Queue() noexcept { clear(); }
+template <typename T> Queue<T>::Queue() { }
+template <typename T> Queue<T>::~Queue() noexcept { clear(); }
 
-template<typename T> bool Queue<T>::operator==(const Queue<T>& _other) const noexcept { return this == &_other; }
-template<typename T> bool Queue<T>::operator!=(const Queue<T>& _other) const noexcept { return this != &_other; }
+template <typename T> bool Queue<T>::operator==(const Queue<T>& _other) const noexcept { return this == &_other; }
+template <typename T> bool Queue<T>::operator!=(const Queue<T>& _other) const noexcept { return this != &_other; }
 
-template<typename T> Queue<T>::operator bool() const noexcept { return mSize > 0; }
+template <typename T> Queue<T>::operator bool() const noexcept { return mSize > 0; }
 
-template<typename T> void Queue<T>::enqueue(const T& _data) {
+template <typename T> void Queue<T>::enqueue(const T& _data) {
     typename Queue<T>::Node* newNode = makeNewNode(_data);
 
     if (mHead)
@@ -71,7 +71,7 @@ template<typename T> void Queue<T>::enqueue(const T& _data) {
     mTail = newNode;
     ++mSize;
 }
-template<typename T> void Queue<T>::dequeue() {
+template <typename T> void Queue<T>::dequeue() {
     if (mSize) {
         typename Queue<T>::Node* nextNode = mHead->next;
 
@@ -84,13 +84,12 @@ template<typename T> void Queue<T>::dequeue() {
         --mSize;
     }
 }
-template<typename T> void Queue<T>::clear() {
+template <typename T> void Queue<T>::clear() {
     while (mSize)
         dequeue();
 }
 
-template<typename T> T& Queue<T>::front() { return mHead->data; }
+template <typename T> T& Queue<T>::front() { return mHead->data; }
 
-template<typename T> unsigned int Queue<T>::size() const noexcept { return mSize; }
-template<typename T> bool Queue<T>::isEmpty() const noexcept { return mSize == 0; }
-
+template <typename T> unsigned int Queue<T>::size() const noexcept { return mSize; }
+template <typename T> bool Queue<T>::isEmpty() const noexcept { return mSize == 0; }
