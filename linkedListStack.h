@@ -10,6 +10,12 @@ class Stack {
         };
 
     public:
+        Stack(const Stack<T>&) = delete;
+        Stack(Stack<T>&&) noexcept = delete;
+
+        Stack<T>& operator=(const Stack<T>&) = delete;
+        Stack<T>& operator=(Stack<T>&&) noexcept = delete;
+
         Stack();
         ~Stack() noexcept;
 
