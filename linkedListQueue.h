@@ -34,7 +34,7 @@ class Queue {
         bool isEmpty() const noexcept;
 
     private:
-        Node* makeNewNode(const T& _data, Node* _next = { });
+        Node* makeNewNode(const T& _data, Node* _next = { }) const;
 
     private:
         Node* mHead = { };
@@ -43,7 +43,7 @@ class Queue {
         unsigned int mSize = { };
 };
 
-template<typename T> typename Queue<T>::Node* Queue<T>::makeNewNode(const T& _data, typename Queue<T>::Node* _next) {
+template<typename T> typename Queue<T>::Node* Queue<T>::makeNewNode(const T& _data, typename Queue<T>::Node* _next) const {
     typename Queue<T>::Node* newNode = new Node;
     newNode->data = _data;
     newNode->next = _next;
