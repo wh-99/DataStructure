@@ -190,7 +190,7 @@ template <typename T> void List<T>::push_front(const T& _data) {
     ++mSize;
 }
 template <typename T> void List<T>::push_back(const T& _data) {
-    typename List<T>::Node* newNode = makeNewNode(_data, mTail, { });
+    typename List<T>::Node* newNode = makeNewNode(_data, mTail);
 
     if (mSize)
         mTail->next = newNode;
