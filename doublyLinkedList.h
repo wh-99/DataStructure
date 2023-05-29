@@ -6,8 +6,8 @@ class List {
         struct Node {
             T data = { };
 
-            Node* next = { };
             Node* prev = { };
+            Node* next = { };
         };
 
     public:
