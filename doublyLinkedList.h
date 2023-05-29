@@ -16,12 +16,12 @@ class List {
                 Iterator();
                 ~Iterator() noexcept;
 
-                Iterator(Node* _target);
+                Iterator(Node* _target) noexcept;
 
-                T& operator*() const;       // not safe
-                Iterator& operator++();     // prefix
+                T& operator*() const;               // not safe
+                Iterator& operator++() noexcept;    // prefix
 
-                operator bool() const;
+                operator bool() const noexcept;
 
             private:
                 Node* target = { };
@@ -56,11 +56,11 @@ class List {
         void remove_data(const T& _data);
         void clear();
 
-        T& front() const;           // not safe
-        T& back() const;            // not safe
+        T& front() const;                   // not safe
+        T& back() const;                    // not safe
 
-        Iterator begin() const;     // not safe
-        Iterator end() const;       // not safe
+        Iterator begin() const noexcept;
+        Iterator end() const noexcept;
 
         unsigned int size() const noexcept;
         bool isEmpty() const noexcept;
@@ -79,18 +79,18 @@ class List {
 template <typename T> List<T>::Iterator::Iterator() { }
 template <typename T> List<T>::Iterator::~Iterator() noexcept { }
 
-template <typename T> List<T>::Iterator::Iterator(typename List<T>::Node* _target)
+template <typename T> List<T>::Iterator::Iterator(typename List<T>::Node* _target) noexcept
     : target{_target} { }
 
 template <typename T> T& List<T>::Iterator::operator*() const { return target->data; }
-template <typename T> typename List<T>::Iterator& List<T>::Iterator::operator++() {
+template <typename T> typename List<T>::Iterator& List<T>::Iterator::operator++() noexcept {
     if (target)
         target = target->next;
 
     return *this;
 }
 
-template <typename T> List<T>::Iterator::operator bool() const { return target; }
+template <typename T> List<T>::Iterator::operator bool() const noexcept { return target; }
 
 
 template<typename T> typename List<T>::Node* List<T>::makeNewNode(const T& _data, typename List<T>::Node* _prev, typename List<T>::Node* _next) const {
@@ -309,11 +309,11 @@ template<typename T> void List<T>::clear() {
         pop_front();
 }
 
-template<typename T> unsigned int List<T>::size() const noexcept { return mSize; }
-template<typename T> bool List<T>::isEmpty() const noexcept { return mSize == 0; }
-
 template <typename T> T& List<T>::front() const { return mHead->data; }
 template <typename T> T& List<T>::back() const { return mTail->data; }
 
-template <typename T> typename List<T>::Iterator List<T>::begin() const { return Iterator(mHead); }
-template <typename T> typename List<T>::Iterator List<T>::end() const { return Iterator(); }
+template <typename T> typename List<T>::Iterator List<T>::begin() const noexcept { return Iterator(mHead); }
+template <typename T> typename List<T>::Iterator List<T>::end() const noexcept { return Iterator(); }
+
+template<typename T> unsigned int List<T>::size() const noexcept { return mSize; }
+template<typename T> bool List<T>::isEmpty() const noexcept { return mSize == 0; }
