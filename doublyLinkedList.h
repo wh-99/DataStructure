@@ -90,10 +90,10 @@ template <typename T> typename List<T>::Iterator& List<T>::Iterator::operator++(
     return *this;
 }
 
-template <typename T> List<T>::Iterator::operator bool() const noexcept { return target; }
+template <typename T> List<T>::Iterator::operator bool() const noexcept { return (target ? true : false); }
 
 
-template<typename T> typename List<T>::Node* List<T>::makeNewNode(const T& _data, typename List<T>::Node* _prev, typename List<T>::Node* _next) const {
+template <typename T> typename List<T>::Node* List<T>::makeNewNode(const T& _data, typename List<T>::Node* _prev, typename List<T>::Node* _next) const {
     typename List<T>::Node* newNode = new Node;
     newNode->data = _data;
     newNode->prev = _prev;
@@ -101,7 +101,7 @@ template<typename T> typename List<T>::Node* List<T>::makeNewNode(const T& _data
 
     return newNode;
 }
-template<typename T> typename List<T>::Node* List<T>::findIdx(const unsigned int& _idx) const {
+template <typename T> typename List<T>::Node* List<T>::findIdx(const unsigned int& _idx) const {
     typename List<T>::Node* target = mHead;
     unsigned int steps = _idx;
 
@@ -120,8 +120,8 @@ template<typename T> typename List<T>::Node* List<T>::findIdx(const unsigned int
     return target;
 }
 
-template<typename T> List<T>::List() { }
-template<typename T> List<T>::~List() noexcept { clear(); }
+template <typename T> List<T>::List() { }
+template <typename T> List<T>::~List() noexcept { clear(); }
 
 template <typename T> List<T>::List(const List<T>& _other) { *this = _other; }
 template <typename T> List<T>::List(List<T>&& _other) noexcept { *this = std::move(_other); }
@@ -177,7 +177,7 @@ template <typename T> T& List<T>::operator[](const unsigned int& _idx) const { r
 
 template <typename T> List<T>::operator bool() const noexcept { return mSize > 0; }
 
-template<typename T> void List<T>::push_front(const T& _data) {
+template <typename T> void List<T>::push_front(const T& _data) {
     typename List<T>::Node* newNode = makeNewNode(_data, { }, mHead);
 
     if (mSize)
@@ -189,7 +189,7 @@ template<typename T> void List<T>::push_front(const T& _data) {
     mHead = newNode;
     ++mSize;
 }
-template<typename T> void List<T>::push_back(const T& _data) {
+template <typename T> void List<T>::push_back(const T& _data) {
     typename List<T>::Node* newNode = makeNewNode(_data, mTail, { });
 
     if (mSize)
@@ -201,7 +201,7 @@ template<typename T> void List<T>::push_back(const T& _data) {
     mTail = newNode;
     ++mSize;
 }
-template<typename T> void List<T>::insert(const T& _data, const unsigned int& _idx) {
+template <typename T> void List<T>::insert(const T& _data, const unsigned int& _idx) {
     if (0 < _idx && _idx < mSize - 1) {
         typename List<T>::Node* targetPrev = findIdx(_idx);
         typename List<T>::Node* targetNext = targetPrev->next;
@@ -220,7 +220,7 @@ template<typename T> void List<T>::insert(const T& _data, const unsigned int& _i
         push_back(_data);
 }
 
-template<typename T> void List<T>::pop_front() {
+template <typename T> void List<T>::pop_front() {
     if (mSize) {
         typename List<T>::Node* next = mHead->next;
 
@@ -235,7 +235,7 @@ template<typename T> void List<T>::pop_front() {
         --mSize;
     }
 }
-template<typename T> void List<T>::pop_back() {
+template <typename T> void List<T>::pop_back() {
     if (mSize) {
         typename List<T>::Node* prev = mTail->prev;
 
@@ -250,7 +250,7 @@ template<typename T> void List<T>::pop_back() {
         --mSize;
     }
 }
-template<typename T> void List<T>::remove_idx(const unsigned int& _idx) {
+template <typename T> void List<T>::remove_idx(const unsigned int& _idx) {
     if (mSize) {
         if (0 < _idx && _idx < mSize - 1) {
             typename List<T>::Node* target = findIdx(_idx);
@@ -271,7 +271,7 @@ template<typename T> void List<T>::remove_idx(const unsigned int& _idx) {
             pop_back();
     }
 }
-template<typename T> void List<T>::remove_data(const T& _data) {
+template <typename T> void List<T>::remove_data(const T& _data) {
     typename List<T>::Node* target = [&_data](typename List<T>::Node* _head) {
         typename List<T>::Node* current = _head;
 
@@ -304,7 +304,7 @@ template<typename T> void List<T>::remove_data(const T& _data) {
         }
     }
 }
-template<typename T> void List<T>::clear() {
+template <typename T> void List<T>::clear() {
     while (mSize)
         pop_front();
 }
@@ -315,5 +315,5 @@ template <typename T> T& List<T>::back() const { return mTail->data; }
 template <typename T> typename List<T>::Iterator List<T>::begin() const noexcept { return Iterator(mHead); }
 template <typename T> typename List<T>::Iterator List<T>::end() const noexcept { return Iterator(); }
 
-template<typename T> unsigned int List<T>::size() const noexcept { return mSize; }
-template<typename T> bool List<T>::isEmpty() const noexcept { return mSize == 0; }
+template <typename T> unsigned int List<T>::size() const noexcept { return mSize; }
+template <typename T> bool List<T>::isEmpty() const noexcept { return mSize == 0; }
