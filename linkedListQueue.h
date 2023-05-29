@@ -4,9 +4,9 @@ template <typename T>
 class Queue {
     private:
         struct Node {
-            T data;
+            T data = { };
 
-            Node* next;
+            Node* next = { };
         };
 
     public:
