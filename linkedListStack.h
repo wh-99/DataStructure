@@ -34,7 +34,7 @@ class Stack {
         bool isEmpty() const noexcept;
 
     private:
-        Node* makeNewNode(const T& _data, Node* _prev = { });
+        Node* makeNewNode(const T& _data, Node* _prev = { }) const;
 
     private:
         Node* mTail = { };
@@ -42,7 +42,7 @@ class Stack {
         unsigned int mSize = { };
 };
 
-template<typename T> typename Stack<T>::Node* Stack<T>::makeNewNode(const T& _data, typename Stack<T>::Node* _prev) {
+template<typename T> typename Stack<T>::Node* Stack<T>::makeNewNode(const T& _data, typename Stack<T>::Node* _prev) const {
     typename Stack<T>::Node* newNode = new Node;
     newNode->data = _data;
     newNode->prev = _prev;
